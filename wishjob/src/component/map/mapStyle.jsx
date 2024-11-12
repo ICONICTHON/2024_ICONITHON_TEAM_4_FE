@@ -9,5 +9,7 @@ export const Wrapper = styled.div`
   width: 88vw;
 `;
 export const MapImg = styled.img`
+  position: relative;
+  width: 92%;
   margin: 4vw;
 `;
