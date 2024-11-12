@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./mapStyle";
-import Map_2f from "../../asset/image/2f_map.png";
-import Map_3f from "../../asset/image/3f_map.png";
+import Map_2f from "../../asset/image/2f_map.svg";
+import Map_3f from "../../asset/image/3f_map.svg";
 
 export default function Map(props) {
   const [mapImg, setMapImg] = useState(Map_2f);

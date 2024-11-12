@@ -5,13 +5,11 @@ import { useLocation } from "react-router-dom";
 import Map from "../component/map/map";
 import DaySelection from "../component/map/daySelction";
 import FloorSelection from "../component/map/floorSelection";
+import BoothList from "../component/mainList/boothList";
 
 const dayList = [{ name: "1일차" }, { name: "2일차" }, { name: "3일차" }];
 const floorList = [{ name: "2층" }, { name: "3층" }];
 
-const Text = styled.div`
-  font-family: "SCDream4";
-`;
 const Content = styled.div`
   opacity: ${(props) => (props.visible ? 1 : 0)};
   transform: ${(props) =>
@@ -58,6 +56,7 @@ export default function Main() {
             setFloorOption={setFloorOption}
           />
         </Select>
+        <BoothList floorOption={floorOption} />
       </Content>
     </div>
   );
