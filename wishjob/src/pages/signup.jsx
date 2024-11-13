@@ -3,9 +3,12 @@ import Header from "../component/header/header";
 import styled from "styled-components";
 
 const Container = styled.div`
-  width: 100%;
+  width: 100vw;
   margin: 0 auto;
   padding: 10px;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
   background-color: #ffffff;
   font-family: "SCDream4", sans-serif;
 `;
@@ -13,7 +16,8 @@ const Container = styled.div`
 const Title = styled.h2`
   font-size: 20px;
   font-weight: bold;
-  margin-top: 20px;
+  color: #000;
+  margin-top: 80px;
 `;
 
 const FormGroup = styled.div`
@@ -30,7 +34,7 @@ const Label = styled.label`
 const Input = styled.input`
   width: 100%;
   height: 40px;
-  padding: 8px;
+  padding: 8px auto;
   border-radius: 4px;
   border: 1px solid ${(props) => (props.variant === "primary" ? "#f49c00" : "#cccccc")};
   background-color: ${(props) => (props.variant === "primary" ? "#ffffff" : "#f0f0f0")};
@@ -55,7 +59,7 @@ const SignupButton = styled.button`
   background-color: #f49c00;
   border-radius: 16px;
   color: #000;
-  font-weight: 500;
+  font-weight: bold;
   font-size: 14px;
   border: none;
   cursor: pointer;
@@ -72,8 +76,9 @@ function SignupPage() {
   const isPasswordMatch = password && confirmPassword && password === confirmPassword;
 
   return (
+    <div>
+    <Header />
     <Container>
-      <Header />
       <Title>회원 가입</Title>
       <FormGroup>
         <Label>아이디(이메일)</Label>
@@ -108,6 +113,7 @@ function SignupPage() {
         <SignupButton>회원가입하기</SignupButton>
       </ButtonContainer>
     </Container>
+    </div>
   );
 }
 

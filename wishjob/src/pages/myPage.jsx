@@ -1,20 +1,18 @@
-// MyPage.jsx
 import React from "react";
 import styled from "styled-components";
 import Header from "../component/header/header";
-import { IoMenu } from "react-icons/io5";
-import { TbUserSquareRounded } from "react-icons/tb";
 import { FiLogOut } from "react-icons/fi";
 import { FaChevronRight } from "react-icons/fa";
 
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
   margin: 0 auto;
+  padding: 10px;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
   background-color: #ffffff;
   font-family: "SCDream4", sans-serif;
-  padding: 10px;
-  box-sizing: border-box;
 `;
 
 const Title = styled.h2`
@@ -22,19 +20,7 @@ const Title = styled.h2`
   font-weight: bold;
   color: #000;
   text-align: center;
-  margin-top: 20px;
-`;
-
-const MenuIcon = styled.div`
-  cursor: pointer;
-`;
-
-const UserIcon = styled.div`
-  cursor: pointer;
-`;
-
-const ListContainer = styled.div`
-  margin-top: 20px;
+  margin-top: 80px;
 `;
 
 const ListItem = styled.div`
@@ -49,37 +35,30 @@ const ListItem = styled.div`
   cursor: ${(props) => (props.logout ? "pointer" : "default")};
 `;
 
-export default function MyPage() {
+const MyPage = () => {
+  const menuItems = [
+    { text: "예약 내역", icon: <FaChevronRight /> },
+    { text: "MY 정보", icon: <FaChevronRight /> },
+    { text: "MY 관심 직무", icon: <FaChevronRight /> },
+    { text: "MY 이력서", icon: <FaChevronRight /> },
+  ];
+
   return (
-    <Container>
-      <Header>
-        <MenuIcon>
-          <IoMenu size={28} />
-        </MenuIcon>
-        <Title>나 JOB알아봐라</Title>
-        <UserIcon>
-          <TbUserSquareRounded size={28} />
-        </UserIcon>
-      </Header>
-      
-      <ListContainer>
+    <div>
+      <Header />
+      <Container>
         <Title>마이페이지</Title>
-        <ListItem>
-          예약 내역 <FaChevronRight />
-        </ListItem>
-        <ListItem>
-          MY 정보 <FaChevronRight />
-        </ListItem>
-        <ListItem>
-          MY 관심 직무 <FaChevronRight />
-        </ListItem>
-        <ListItem>
-          MY 이력서 <FaChevronRight />
-        </ListItem>
+        {menuItems.map((item, index) => (
+          <ListItem key={index}>
+            {item.text} {item.icon}
+          </ListItem>
+        ))}
         <ListItem logout>
           로그 아웃 <FiLogOut />
         </ListItem>
-      </ListContainer>
-    </Container>
+      </Container>
+    </div>
   );
-}
+};
+
+export default MyPage;
