@@ -7,9 +7,9 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   width: 88vw;
+  height: 72vh;
 `;
 export const MapImg = styled.img`
   position: relative;
-  width: 92%;
-  margin: 4vw;
+  max-height: 92%;
 `;
