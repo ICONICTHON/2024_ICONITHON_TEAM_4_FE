@@ -13,7 +13,7 @@ export default function Header() {
       </S.MenuIcon>
       <S.Text onClick={() => nav("/main")}>나 JOB알아봐라</S.Text>
       <S.UserIcon>
-        <TbUserSquareRounded size={28} />
+        <TbUserSquareRounded size={28} onClick={() => nav("/mypage")} />
       </S.UserIcon>
     </S.Wrapper>
   );

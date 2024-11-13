@@ -44,7 +44,7 @@ export default function BoothList({ floorOption }) {
   return (
     <S.Wrapper>
       {filterBoothes.map((booth, index) => (
-        <S.Item key={index} onClick={() => nav("/")}>
+        <S.Item key={index} onClick={() => nav("/company_info")}>
           <S.BoothNum>{booth.number}</S.BoothNum>
           <S.BoothCate>{booth.cate}</S.BoothCate>
           <S.BoothName>{booth.name}</S.BoothName>
