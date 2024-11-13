@@ -8,7 +8,7 @@ export default function Header() {
   const nav = useNavigate();
   return (
     <S.Wrapper>
-      <S.MenuIcon>
+      <S.MenuIcon onClick={() => nav("/mypage")}>
         <IoMenu size={28} />
       </S.MenuIcon>
       <S.Text onClick={() => nav("/main")}>나 JOB알아봐라</S.Text>

@@ -13,7 +13,7 @@ export const CompanyImageSection = styled.div`
   grid-template-columns: 2fr 1fr;
   gap: 10px;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 60px;
 `;
 
 export const CompanyImage = styled.div`
