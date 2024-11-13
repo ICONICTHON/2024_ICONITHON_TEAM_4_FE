@@ -1,14 +1,27 @@
 // company_inform.jsx
-import React from "react";
+import React, { useState } from "react";
 import { IoMenu } from "react-icons/io5";
 import { TbUserSquareRounded } from "react-icons/tb";
-import Header from "../component/header/header";
+import Header from "../../component/header/header";
 import * as S from "./company_inform_style";
+import WaitingPopup from "../../component/Popup/waiting_popup";
+import ReservationFinish from "../../component/Popup/reservation_finish";
 import { useLocation } from "react-router-dom";
 
 const CompanyInfo = () => {
   const location = useLocation();
+  const [isWaitingModalOpen, setIsWaitingModalOpen] = useState(false);
+  const [isReservationModalOpen, setIsReservationModalOpen] = useState(false);
 
+  // 모달 열기 및 닫기 함수
+  const openWaitingModal = () => setIsWaitingModalOpen(true);
+  const closeWaitingModal = () => setIsWaitingModalOpen(false);
+
+  const openReservationModal = () => {
+    setIsWaitingModalOpen(false); // 대기 모달 닫기
+    setIsReservationModalOpen(true); // 예약 완료 모달 열기
+  };
+  const closeReservationModal = () => setIsReservationModalOpen(false);
     
   return (
     <>
@@ -56,8 +69,14 @@ const CompanyInfo = () => {
         </S.AvailableCompaniesSection>
 
         <S.WaitButtonContainer>
-          <S.WaitButton>대기하기</S.WaitButton>
+          <S.WaitButton onClick={openWaitingModal}>대기하기</S.WaitButton>
         </S.WaitButtonContainer>
+
+        {/* 대기 모달 */}
+        {isWaitingModalOpen && <WaitingPopup onClose={closeWaitingModal} onConfirm={openReservationModal} />}
+
+        {/* 예약 완료 모달 */}
+        {isReservationModalOpen && <ReservationFinish onClose={closeReservationModal} />}
       </S.Container>
     </>
   );
