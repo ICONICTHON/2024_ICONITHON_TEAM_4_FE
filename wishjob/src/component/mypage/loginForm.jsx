@@ -13,6 +13,8 @@ export default function LoginForm() {
     setShowPassword((prevState) => !prevState);
   };
 
+  const [userType, setUserType] = useState(null);
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -23,8 +25,10 @@ export default function LoginForm() {
       });
 
       if (response.status === 200) {
+        setUserType(response.data.user_type);
+        console.log("User Type:", response.data);
         alert("로그인이 성공적으로 완료되었습니다.");
-        nav("/main");
+        nav("/main", { state: response.data.user_type });
       }
     } catch (error) {
       console.error("로그인 오류:", error);
