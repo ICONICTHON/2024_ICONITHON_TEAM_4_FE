@@ -1,9 +1,9 @@
-// TeamItemList.jsx
+// waiting_list.jsx
 import React, { useState,useEffect } from "react";
 import { IoCheckmarkCircleOutline } from "react-icons/io5";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FiFileText } from "react-icons/fi";
-import * as S from "../../pages/For_Company/ForCompany_style";
+import * as S from "./waiting_list_style";
 
 const TeamItemList = ({ setTeamCount }) => { // props로 setTeamCount 받기
     const [teams, setTeams] = useState([

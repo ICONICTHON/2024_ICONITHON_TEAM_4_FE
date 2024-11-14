@@ -54,6 +54,12 @@ export const ResumeButton = styled.button`
   cursor: pointer;
   white-space: nowrap; /* 텍스트 줄바꿈 방지 */
 
+  &:active,&:hover {
+    opacity: 0.8; /* 마우스 올렸을 때 흐려짐 */
+    transform: scale(0.98); /* 클릭 시 크기를 줄여 눌러진 느낌을 줌 */
+    transition: transform 0.1s ease;
+  }
+
   @media (max-width: 768px) {
     font-size: 0.8rem;
     padding: 5px 8px;
