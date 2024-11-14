@@ -27,3 +27,9 @@ export const UserIcon = styled.div`
   cursor: pointer;
   margin-right: 16px;
 `;
+
+export const SetSpace = styled.div`
+  width: 28px;
+  height: 28px;
+  margin-left: 16px;
+`;

@@ -21,9 +21,10 @@ export const DayButton = styled.button`
 
   &:hover {
     background-color: #f49c00;
-    transform: scale(0.92);
-    transition: transfrom 0.2s ease;
+    transform: scale(1);
+    transition: transfrom 0.8s ease;
   }
+
   /* 양 끝 항목에만 border-radius 설정 */
   &:first-child {
     border-radius: 16px 0 0px 16px;
