@@ -3,7 +3,12 @@ import * as S from "./boothListStyle";
 import { useNavigate } from "react-router-dom";
 
 const boothes = [
-  { number: "A01", cate: "채용상담관", name: "한국항공우주산업KAI", floor: 3 },
+  {
+    number: "A01",
+    cate: "컨설팅 및 부대행사관",
+    name: "ATIMEMEDIA 어타임미디어",
+    floor: 3,
+  },
   { number: "A02", cate: "채용상담관", name: "한국항공우주산업KAI", floor: 3 },
   { number: "A03", cate: "채용상담관", name: "한국항공우주산업KAI", floor: 3 },
   { number: "A04", cate: "채용상담관", name: "한국항공우주산업KAI", floor: 3 },

@@ -15,14 +15,12 @@ export const DayButton = styled.button`
   border: none;
   cursor: pointer;
   height: 32px;
-  transition: background-color 0.1s;
   font-family: SCDream4;
   font-size: 12px;
 
   &:hover {
     background-color: #f49c00;
-    transform: scale(1);
-    transition: transfrom 0.8s ease;
+    opacity: 0.8;
   }
 
   /* 양 끝 항목에만 border-radius 설정 */
