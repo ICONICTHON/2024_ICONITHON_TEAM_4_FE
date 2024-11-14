@@ -1,9 +1,15 @@
-import React, { useState } from "react";
-import Header from "../component/header/header";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import axios from "../axios";
 
 const Container = styled.div`
+  opacity: ${(props) => (props.visible ? 1 : 0)};
+  transform: ${(props) =>
+    props.visible ? "translateY(0)" : "translateY(20px)"};
+  transition: opacity 0.5s ease, transform 0.5s ease;
+
   width: 100vw;
   padding: 20px;
   justify-content: space-between;
@@ -53,7 +59,7 @@ const ButtonContainer = styled.div`
   margin-top: 20px;
 `;
 
-const SignupButton = styled.button`
+const SignupButton = styled.input`
   width: 100%;
   height: 32px;
   background-color: #f49c00;
@@ -74,20 +80,49 @@ function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [birthDate, setBirthDate] = useState("");
+  const [full_name, setName] = useState("");
+  const [phoneNum, setPhone] = useState("");
+  const [birth, setBirthDate] = useState("");
 
   const isPasswordMatch =
     password && confirmPassword && password === confirmPassword;
 
   const nav = useNavigate();
+  const [isVisible, setIsVisible] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    setIsVisible(false);
+    const timeout = setTimeout(() => setIsVisible(true), 50);
+    return () => clearTimeout(timeout);
+  }, [location]);
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(`/users/signup/`, {
+        email,
+        password,
+        full_name,
+        phoneNum,
+        birth,
+      });
+
+      if (response.status === 201) {
+        alert("회원가입이 성공적으로 완료되었습니다.");
+        nav("/main"); // 회원가입 성공 시 메인 페이지로 이동
+      }
+    } catch (error) {
+      console.error("회원가입 오류:", error);
+      alert("회원가입에 실패했습니다. 다시 시도해주세요.");
+    }
+  };
 
   return (
-    <div>
-      <Header />
-      <Container>
-        <Title>회원 가입</Title>
+    <Container visible={isVisible}>
+      <Title>회원 가입</Title>
+      <form onSubmit={handleSignup}>
         <FormGroup>
           <Label>아이디(이메일)</Label>
           <Input
@@ -123,7 +158,7 @@ function SignupPage() {
           <Label>이름</Label>
           <Input
             type="text"
-            value={name}
+            value={full_name}
             onChange={(e) => setName(e.target.value)}
           />
         </FormGroup>
@@ -131,23 +166,23 @@ function SignupPage() {
           <Label>전화번호</Label>
           <Input
             type="text"
-            value={phone}
+            value={phoneNum}
             onChange={(e) => setPhone(e.target.value)}
           />
         </FormGroup>
         <FormGroup>
           <Label>생년월일(6자리)</Label>
           <Input
-            type="text"
-            value={birthDate}
+            type="date"
+            value={birth}
             onChange={(e) => setBirthDate(e.target.value)}
           />
         </FormGroup>
-        <ButtonContainer onClick={() => nav("/main")}>
-          <SignupButton>회원가입</SignupButton>
+        <ButtonContainer>
+          <SignupButton type="submit" value={"회원가입"} />
         </ButtonContainer>
-      </Container>
-    </div>
+      </form>
+    </Container>
   );
 }
 
