@@ -37,6 +37,7 @@ export default function Main() {
   const [isVisible, setIsVisible] = useState(false);
   const location = useLocation();
   const [floorOption, setFloorOption] = useState(floorList[0].name);
+  const [dayOption, setDayOption] = useState(dayList[0].name);
 
   useEffect(() => {
     setIsVisible(false);
@@ -44,24 +45,28 @@ export default function Main() {
     return () => clearTimeout(timeout);
   }, [location]);
 
-  const isCompany = 0;
+  const userType = location.state;
 
   return (
     <div>
-      {isCompany === 0 ? (
+      {userType === 0 ? (
         <>
           <Header />
           <Content visible={isVisible}>
             <Map floorOption={floorOption} />
             <Select>
-              <DaySelection list={dayList} />
+              <DaySelection
+                list={dayList}
+                dayOption={dayOption}
+                setDayOption={setDayOption}
+              />
               <FloorSelection
                 list={floorList}
                 floorOption={floorOption}
                 setFloorOption={setFloorOption}
               />
             </Select>
-            <BoothList floorOption={floorOption} />
+            <BoothList floorOption={floorOption} dayOption={dayOption} />
           </Content>
         </>
       ) : (

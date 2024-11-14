@@ -1,58 +1,53 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./boothListStyle";
 import { useNavigate } from "react-router-dom";
+import axios from "../../axios";
 
-const boothes = [
-  {
-    number: "A01",
-    cate: "컨설팅 및 부대행사관",
-    name: "ATIMEMEDIA 어타임미디어",
-    floor: 3,
-  },
-  { number: "A02", cate: "채용상담관", name: "한국항공우주산업KAI", floor: 3 },
-  { number: "A03", cate: "채용상담관", name: "한국항공우주산업KAI", floor: 3 },
-  { number: "A04", cate: "채용상담관", name: "한국항공우주산업KAI", floor: 3 },
-  { number: "A05", cate: "채용상담관", name: "한국항공우주산업KAI", floor: 3 },
-  { number: "A06", cate: "채용상담관", name: "한국항공우주산업KAI", floor: 3 },
-  { number: "A07", cate: "채용상담관", name: "한국항공우주산업KAI", floor: 3 },
-  { number: "A08", cate: "채용상담관", name: "한국항공우주산업KAI", floor: 3 },
-  { number: "A09", cate: "채용상담관", name: "한국항공우주산업KAI", floor: 3 },
-  { number: "A10", cate: "채용상담관", name: "한국항공우주산업KAI", floor: 2 },
-  { number: "A11", cate: "채용상담관", name: "한국항공우주산업KAI", floor: 2 },
-  { number: "A12", cate: "채용상담관", name: "한국항공우주산업KAI", floor: 2 },
-  { number: "A13", cate: "채용상담관", name: "한국항공우주산업KAI", floor: 2 },
-  { number: "A14", cate: "채용상담관", name: "한국항공우주산업KAI", floor: 2 },
-  { number: "A15", cate: "채용상담관", name: "한국항공우주산업KAI", floor: 2 },
-  { number: "A16", cate: "채용상담관", name: "한국항공우주산업KAI", floor: 2 },
-  { number: "A17", cate: "채용상담관", name: "한국항공우주산업KAI", floor: 2 },
-  { number: "A18", cate: "채용상담관", name: "한국항공우주산업KAI", floor: 2 },
-  { number: "A19", cate: "채용상담관", name: "한국항공우주산업KAI", floor: 2 },
-  { number: "A20", cate: "채용상담관", name: "한국항공우주산업KAI", floor: 2 },
-  { number: "A21", cate: "채용상담관", name: "한국항공우주산업KAI", floor: 2 },
-];
-
-export default function BoothList({ floorOption }) {
+export default function BoothList({ floorOption, dayOption }) {
   const nav = useNavigate();
-  const [selectedFloor, setSelectedFloor] = useState(2);
-  const filterBoothes = boothes.filter(
-    (booth) => booth.floor === selectedFloor
-  );
+  const [selectedFloor, setSelectedFloor] = useState("2");
+  const [selectedDay, setSelectedDay] = useState("1"); // 기본값 설정
+  const [booths, setData] = useState([]); // 빈 배열로 초기화
 
   useEffect(() => {
     if (floorOption === "2층") {
-      setSelectedFloor(2);
+      setSelectedFloor("2");
     } else {
-      setSelectedFloor(3);
+      setSelectedFloor("3");
     }
-  }, [floorOption]);
+    if (dayOption === "1일차") {
+      setSelectedDay("1");
+    } else if (dayOption === "2일차") {
+      setSelectedDay("2");
+    } else if (dayOption === "3일차") {
+      setSelectedDay("3");
+    }
+  }, [floorOption, dayOption]);
+
+  useEffect(() => {
+    fetchData();
+  }, [selectedFloor, selectedDay]);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        `jobfair/boothList/${selectedDay}/${selectedFloor}/`
+      );
+      setData(response.data.booths); // 배열 형태일 경우에만 설정
+      console.log(response.data.booths);
+    } catch (e) {
+      console.log(e);
+      setData([]); // 오류 발생 시 빈 배열로 설정
+    }
+  };
 
   return (
     <S.Wrapper>
-      {filterBoothes.map((booth, index) => (
+      {booths.map((booth, index) => (
         <S.Item key={index} onClick={() => nav("/company_info")}>
-          <S.BoothNum>{booth.number}</S.BoothNum>
-          <S.BoothCate>{booth.cate}</S.BoothCate>
-          <S.BoothName>{booth.name}</S.BoothName>
+          <S.BoothNum>{booth.boothNum}</S.BoothNum>
+          <S.BoothCate>{booth.boothCate}</S.BoothCate>
+          <S.BoothName>{booth.boothName}</S.BoothName>
         </S.Item>
       ))}
     </S.Wrapper>
