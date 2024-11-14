@@ -91,6 +91,7 @@ const Textarea = styled.textarea`
   border: 1px solid #a39890;
   border-radius: 8px;
   padding: 5px;
+  box-sizing: border-box;
 `;
 
 const InfoGroup = styled.div`
