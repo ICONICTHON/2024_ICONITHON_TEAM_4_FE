@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
+  font-family: "SCDream4";
   flex-direction: column;
   align-items: center;
   padding: 20px;
@@ -69,20 +70,16 @@ export const QueueLabel = styled.span`
 `;
 
 export const TeamListContainer = styled.div`
+  display:flex;
+  flex-direction:column;
   background-color: #ffffff;
   border-radius: 10px;
   padding: 16px;
   width: 100%;
-  margin-top:10px;
+  margin : 10px;
   max-width: 600px; /* 너비 확대 */
   max-height: 500px; /* 높이 설정 */
   overflow-y: auto; /* 내용이 많을 때 스크롤 활성화 */
-
-  @media (max-width: 768px) {
-    padding: 8px;
-    max-width: 100%; /* 모바일 화면에서 너비 100%로 설정 */
-    max-height: 400px; /* 모바일에서 높이 조정 */
-  }
 `;
 
 export const ButtonContainer = styled.div`
