@@ -12,14 +12,14 @@ import MyReservation from "./pages/mypage/myreservationPage";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <Login />,
   },
   {
     path: "/main",
     element: <Main />,
   },
   {
-    path: "/signup", 
+    path: "/signup",
     element: <Signup />,
   },
   {
@@ -28,15 +28,15 @@ const router = createBrowserRouter([
   },
   {
     path: "company_info",
-    element:<CompanyInfo />,
+    element: <CompanyInfo />,
   },
   {
     path: "/myinfo",
-    element:<MyInfo />,
+    element: <MyInfo />,
   },
   {
     path: "/myresume",
-    element:<MyResume />,
+    element: <MyResume />,
   },
   {
     path: "/myduty",
@@ -46,6 +46,9 @@ const router = createBrowserRouter([
     path: "/myreservation",
     element:<MyReservation />,
   },
+    path:"/ForCompany",
+    element:<ForCompany />
+  }
 ]);
 
 export default router;
