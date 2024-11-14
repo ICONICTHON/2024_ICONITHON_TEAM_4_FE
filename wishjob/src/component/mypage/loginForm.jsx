@@ -17,7 +17,7 @@ const InfoContainer = styled.div`
 
 const Info = styled.input`
   width: 64vw;
-  height: 6vh;
+  height: 32px;
   border-radius: 8px;
   border: solid 2px #fbc400;
   background-color: white;
@@ -88,7 +88,7 @@ export default function LoginForm() {
       </InfoContainer>
       <InfoContainer>
         <LoginButton onClick={() => nav("/main")}>로그인</LoginButton>
-        <NavSignUp>회원가입</NavSignUp>
+        <NavSignUp onClick={() => nav("/signup")}>회원가입</NavSignUp>
       </InfoContainer>
     </Wrapper>
   );

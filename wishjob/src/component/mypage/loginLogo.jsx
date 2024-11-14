@@ -9,11 +9,11 @@ const Container = styled.div`
   align-items: center;
 `;
 const LogoImg = styled.img`
-  width: 40vw;
+  height: 24vh;
 `;
 const Text = styled.div`
   font-family: Typo;
-  font-size: 6vw;
+  font-size: 4vh;
 `;
 
 export default function Logo() {
