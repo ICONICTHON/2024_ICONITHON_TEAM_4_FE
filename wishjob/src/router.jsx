@@ -9,6 +9,7 @@ import MyDuty from "./pages/mypage/mydutyPage";
 import MyReservation from "./pages/mypage/myreservationPage";
 import ForCompany from "./pages/For_Company/ForCompany";
 import Login from "./pages/login/login";
+import ForCompany_reservation from"./pages/For_Company/ForCompany_reservation";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
   {
     path:"/ForCompany",
     element:<ForCompany />,
+  },
+  {
+    path:"/ComReservation",
+    element:<ForCompany_reservation/>
   },
 ]);
 
