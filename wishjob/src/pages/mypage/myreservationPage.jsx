@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Header from '../../component/header/header';
 import BackButton from '../../component/mypage/backbutton';
+import { useNavigate } from "react-router-dom";
+import WaitingCancelPopup from "../../component/Popup/waitingcancel_popup";
 
 // Styled components
 const Container = styled.div`
@@ -115,14 +117,38 @@ const CancelButton = styled.button`
 
 const BoothReservationPage = () => {
   const [activeTab, setActiveTab] = useState('progress');
+  
+  const [reservations, setReservations] = useState([]);
+  const [isWaitingModalOpen, setIsWaitingModalOpen] = useState(false);
+
+  // 모달 열기 및 닫기 함수
+  const openWaitingModal = () => setIsWaitingModalOpen(true);
+  const closeWaitingModal = () => setIsWaitingModalOpen(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = [
+        { id: 1, name: "기업이름기업이름기업이름1", date: "9/17(월) 09:17", status: "progress", queue: 2, waitTime: "30분" },
+        { id: 2, name: "기업이름기업이름기업이름2", date: "9/17(월) 09:17", status: "completed" },
+        { id: 3, name: "기업이름기업이름기업이름3", date: "9/17(월) 09:17", status: "canceled" }
+      ];
+      setReservations(data);
+    };
+
+    fetchData();
+  }, []);
+
+  const filteredReservations = reservations.filter(reservation => reservation.status === activeTab);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
 
+  const navigate = useNavigate();
+
   return (
     <div>
-      <Header>나 JOB알아봐라</Header>
+      <Header />
       <Container>
         <BackButton />
         <Title>예약 내역</Title>
@@ -136,43 +162,31 @@ const BoothReservationPage = () => {
 
         {/* Tab Content */}
         <TabContent>
-          {activeTab === 'progress' && (
-            <ReservationCard>
+          {filteredReservations.map((reservation) => (
+            <ReservationCard key={reservation.id}>
               <CardHeader>
-                <div>기업이름기업이름기업이름</div>
-                <DetailButton>상세보기  </DetailButton>
+                <div>{reservation.name}</div>
+                <DetailButton onClick={() => navigate("/company_info")}>상세보기</DetailButton>
               </CardHeader>
               <Divider />
-              <CardDetails>이용 일시: 9/17(월) 09:17</CardDetails>
-              <QueueInfo>
-                <QueueText>내 앞 대기: <RedText>2팀</RedText></QueueText>
-                <QueueText>예상 대기 시간: <RedText>30분</RedText></QueueText>
-                <CancelButton>대기 취소</CancelButton>
-              </QueueInfo>
+              <CardDetails>이용 일시: {reservation.date}</CardDetails>
+              {reservation.status === 'progress' && (
+                <QueueInfo>
+                  <QueueText>내 앞 대기: <RedText>{reservation.queue}팀</RedText></QueueText>
+                  <QueueText>예상 대기 시간: <RedText>{reservation.waitTime}</RedText></QueueText>
+                  <CancelButton onClick={openWaitingModal}>대기 취소</CancelButton>
+                  {/* 대기 모달 */}
+                  {isWaitingModalOpen && <WaitingCancelPopup onClose={closeWaitingModal} />}
+                </QueueInfo>
+              )}
+              {reservation.status === 'completed' && (
+                <div style={{ color: '#306ED4', fontWeight: 'bold' }}>완료</div>
+              )}
+              {reservation.status === 'canceled' && (
+                <div style={{ color: 'red', fontWeight: 'bold' }}>취소 완료</div>
+              )}
             </ReservationCard>
-          )}
-          {activeTab === 'completed' && (
-            <ReservationCard>
-              <CardHeader>
-                <div>기업이름기업이름기업이름</div>
-                <DetailButton>상세보기 </DetailButton>
-              </CardHeader>
-              <Divider />
-              <CardDetails>이용 일시: 9/17(월) 09:17</CardDetails>
-              <div style={{ color: '#306ED4', fontWeight: 'bold' }}>완료</div>
-            </ReservationCard>
-          )}
-          {activeTab === 'canceled' && (
-            <ReservationCard>
-              <CardHeader>
-                <div>기업이름기업이름기업이름</div>
-                <DetailButton>상세보기 </DetailButton>
-              </CardHeader>
-              <Divider />
-              <CardDetails>이용 일시: 9/17(월) 09:17</CardDetails>
-              <div style={{ color: 'red', fontWeight: 'bold' }}>취소 완료</div>
-            </ReservationCard>
-          )}
+          ))}
         </TabContent>
       </Container>
     </div>

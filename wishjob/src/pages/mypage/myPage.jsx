@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Header from "../../component/header/header";
 import { FiLogOut } from "react-icons/fi";
 import { FaChevronRight } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: 100%;
@@ -32,16 +33,22 @@ const ListItem = styled.div`
   font-size: 18px;
   font-weight: 600;
   color: ${(props) => (props.logout ? "#f41000" : "#000000")};
-  cursor: ${(props) => (props.logout ? "pointer" : "default")};
+  cursor: pointer;
 `;
 
 const MyPage = () => {
+  const navigate = useNavigate();
+
   const menuItems = [
-    { text: "예약 내역", icon: <FaChevronRight /> },
-    { text: "MY 정보", icon: <FaChevronRight /> },
-    { text: "MY 관심 직무", icon: <FaChevronRight /> },
-    { text: "MY 이력서", icon: <FaChevronRight /> },
+    { text: "예약 내역", path: "/myreservation", icon: <FaChevronRight /> },
+    { text: "MY 정보", path: "/myinfo", icon: <FaChevronRight /> },
+    { text: "MY 관심 직무", path: "/myduty", icon: <FaChevronRight /> },
+    { text: "MY 이력서", path: "/myresume", icon: <FaChevronRight /> },
   ];
+
+  const handleNavigation = (path) => {
+    navigate(path);
+  };
 
   return (
     <div>
@@ -49,11 +56,11 @@ const MyPage = () => {
       <Container>
         <Title>마이페이지</Title>
         {menuItems.map((item, index) => (
-          <ListItem key={index}>
+          <ListItem key={index} onClick={() => handleNavigation(item.path)}>
             {item.text} {item.icon}
           </ListItem>
         ))}
-        <ListItem logout>
+        <ListItem logout onClick={() => handleNavigation("/main")}>
           로그 아웃 <FiLogOut />
         </ListItem>
       </Container>
