@@ -5,55 +5,55 @@ export const Container = styled.div`
   font-family: "SCDream4";
   flex-direction: column;
   align-items: center;
-  padding: 80px;
+  padding: 4vw;
   background-color: #f9f9f9;
-  font-size: 1.2rem;
+  font-size: 1rem; /* 기본 글꼴 크기를 조금 줄임 */
 
   @media (max-width: 768px) {
-    padding: 70px;
-    font-size: 1rem;
+    padding: 13vw;
   }
 `;
 
 export const TitleContainer = styled.div`
   display: flex;
-  align-items: center; /* 수직 중앙 정렬 */
+  align-items: center;
   justify-content: center;
   position: relative;
-  width: 90vw;
+  width: 80vw;
   max-width: 500px;
-  padding: 0; /* padding 제거 */
-  margin-bottom: 20px;
+  padding-top: 30px;
+  margin-bottom: 1.5vw; /* 더 작은 여백 */
 
   @media (max-width: 768px) {
-    margin-bottom: 10px;
+    margin-bottom: 6vw;
   }
 `;
 
 export const Title = styled.h2`
-  font-size: 2rem;
+  font-size: 2vw; /* 텍스트 크기를 더 줄임 */
   font-weight: bold;
   color: #333;
   text-align: center;
-  margin: 0; /* 제목 위아래 여백 제거 */
-  line-height: 1.2; /* 텍스트 줄 높이 조정으로 아이콘과 균형 맞춤 */
+  margin: 0;
+  line-height: 1.2;
 
   @media (max-width: 768px) {
-    font-size: 1.5rem;
+    font-size: 5vw;
   }
 `;
 
 export const BackIcon = styled.div`
   position: absolute;
-  left: 0;
-  top: 50%; /* 부모 요소의 중앙에 위치 */
-  transform: translateY(-50%); /* 수직 중앙 정렬 */
+  left: 2vw;
+  top: 50%;
+  padding-top: 30px;
+  transform: translateY(-50%);
   display: flex;
   align-items: center;
+  font-size: 1.8vw; /* 아이콘 크기도 조정 */
   cursor: pointer;
 
   @media (max-width: 768px) {
-    font-size: 1.5rem;
+    font-size: 4.5vw;
   }
 `;
-
