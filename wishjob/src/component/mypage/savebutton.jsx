@@ -1,25 +1,32 @@
 // SaveButtonComponent.jsx
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 import SavePopup from "../Popup/save_popup";
 
 const SaveButtonContainer = styled.div`
   display: flex;
-  justify-content: flex-end;
-  margin: 20px 20px 0 0;
+  width: 88vw;
+  margin-top: 2vh;
+  margin-left: 6vw;
 `;
 
 const SaveButton = styled.button`
-  width: 130px;
-  height: 35px;
-  margin-right: 15px;
+  width: 100%;
+  height: 32px;
   background-color: #f49c00;
   color: #000;
   font-weight: bold;
   font-size: 15px;
-  border-radius: 10px;
+  border-radius: 16px;
   border: none;
   cursor: pointer;
+  font-family: SCDream4;
+  box-shadow: 2px 2px 2px #00000040;
+  &:hover,
+  &:active {
+    transform: scale(0.96);
+    transition: transform 0.2s ease;
+  }
 `;
 
 const SaveButtonComponent = () => {
@@ -38,7 +45,8 @@ const SaveButtonComponent = () => {
       <SaveButtonContainer>
         <SaveButton onClick={handleSaveClick}>저장</SaveButton>
       </SaveButtonContainer>
-      {isPopupOpen && <SavePopup onClose={closePopup} />} {/* SavePopup을 조건부로 렌더링 */}
+      {isPopupOpen && <SavePopup onClose={closePopup} />}{" "}
+      {/* SavePopup을 조건부로 렌더링 */}
     </>
   );
 };

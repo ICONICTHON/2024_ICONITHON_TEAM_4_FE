@@ -1,20 +1,24 @@
 import React from "react";
 
 const WaitingCancelPopup = ({ onClose }) => {
-    return (
-        <div style={styles.modalOverlay}>
-        <div style={styles.modalContent}>
-          <div style={styles.modalBody}>
-            <h3>취소하시겠습니까?</h3>
-            <div style={styles.buttonContainer}>
-              <button style={styles.confirmButton} onClick={onClose}>확인</button>
-              <button style={styles.confirmButton} onClick={onClose}>취소</button>
-            </div>
+  return (
+    <div style={styles.modalOverlay}>
+      <div style={styles.modalContent}>
+        <div style={styles.modalBody}>
+          <h3>취소하시겠습니까?</h3>
+          <div style={styles.buttonContainer}>
+            <button style={styles.confirmButton} onClick={onClose}>
+              확인
+            </button>
+            <button style={styles.confirmButton} onClick={onClose}>
+              취소
+            </button>
           </div>
         </div>
       </div>
-    );
-  };
+    </div>
+  );
+};
 
 // 인라인 스타일 정의
 const styles = {

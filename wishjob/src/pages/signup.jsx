@@ -1,14 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Header from "../component/header/header";
 import styled from "styled-components";
-import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
-  opacity: ${(props) => (props.visible ? 1 : 0)};
-  transform: ${(props) =>
-    props.visible ? "translateY(0)" : "translateY(20px)"};
-  transition: opacity 0.5s ease, transform 0.5s ease;
-
   width: 100vw;
   padding: 20px;
   justify-content: space-between;
@@ -86,19 +81,12 @@ function SignupPage() {
   const isPasswordMatch =
     password && confirmPassword && password === confirmPassword;
 
-  const [isVisible, setIsVisible] = useState(false);
-  const location = useLocation();
-
-  useEffect(() => {
-    setIsVisible(false);
-    const timeout = setTimeout(() => setIsVisible(true), 50);
-    return () => clearTimeout(timeout);
-  }, [location]);
+  const nav = useNavigate();
 
   return (
     <div>
       <Header />
-      <Container visible={isVisible}>
+      <Container>
         <Title>회원 가입</Title>
         <FormGroup>
           <Label>아이디(이메일)</Label>
@@ -155,7 +143,7 @@ function SignupPage() {
             onChange={(e) => setBirthDate(e.target.value)}
           />
         </FormGroup>
-        <ButtonContainer>
+        <ButtonContainer onClick={() => nav("/main")}>
           <SignupButton>회원가입</SignupButton>
         </ButtonContainer>
       </Container>

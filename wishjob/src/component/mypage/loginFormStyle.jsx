@@ -29,7 +29,7 @@ export const PasswordContainer = styled.div`
 export const TogglePasswordButton = styled.span`
   position: absolute;
   right: 2vw;
-  top: 50%;
+  top: 32%;
   transform: scale(0.96);
   transition: transform 0.2s ease;
   cursor: pointer;

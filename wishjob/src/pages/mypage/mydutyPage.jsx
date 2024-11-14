@@ -1,19 +1,28 @@
-import React from 'react';
-import styled from 'styled-components';
-import Header from '../../component/header/header';
-import BackButton from '../../component/mypage/backbutton';
-import SaveButtonComponent from '../../component/mypage/savebutton';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import Header from "../../component/header/header";
+import BackButton from "../../component/mypage/backbutton";
+import SaveButtonComponent from "../../component/mypage/savebutton";
+import { useLocation } from "react-router-dom";
 
-// Styled components
-const Container = styled.div`
+const Wrapper = styled.div`
   width: 100vw;
+  height: 100vh;
+`;
+
+const Container = styled.div`
+  width: 88vw;
   margin: 0 auto;
-  padding: 10px;
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
   background-color: #ffffff;
   font-family: "SCDream4", sans-serif;
+
+  opacity: ${(props) => (props.visible ? 1 : 0)};
+  transform: ${(props) =>
+    props.visible ? "translateY(0)" : "translateY(20px)"};
+  transition: opacity 0.5s ease, transform 0.5s ease;
 `;
 
 const Title = styled.h2`
@@ -53,37 +62,80 @@ const JobCheckbox = styled.label`
   }
 `;
 
-const jobsLeft = ["기획·전략", "인사·HR", "마케팅·광고·MD", "디자인", "운전·운송·배송", "고객상담·TM", "식·음료", "엔지니어링·설계", "교육", "의료·바이오", "공공·복지"];
-const jobsRight = ["고객상담·TM", "법무·사무·총무", "회계·세무", "개발·데이터", "물류·무역", "영업", "금융·보험", "고객서비스·리테일", "제조·생산", "건축·시설", "미디어·문화·스포츠"];
+const jobsLeft = [
+  "기획·전략",
+  "인사·HR",
+  "마케팅·광고·MD",
+  "디자인",
+  "운전·운송·배송",
+  "고객상담·TM",
+  "식·음료",
+  "엔지니어링·설계",
+  "교육",
+  "의료·바이오",
+  "공공·복지",
+];
+const jobsRight = [
+  "고객상담·TM",
+  "법무·사무·총무",
+  "회계·세무",
+  "개발·데이터",
+  "물류·무역",
+  "영업",
+  "금융·보험",
+  "고객서비스·리테일",
+  "제조·생산",
+  "건축·시설",
+  "미디어·문화·스포츠",
+];
+
+const ItemInput = styled.input`
+  cursor: pointer;
+  &:checked {
+    accent-color: #f49c00;
+    border-color: white;
+  }
+`;
 
 const JobSelectionPage = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    setIsVisible(false);
+    const timeout = setTimeout(() => setIsVisible(true), 50);
+    return () => clearTimeout(timeout);
+  }, [location]);
   return (
-    <div>
-        <Header>나 JOB알아봐라</Header>
-        <Container>
+    <Wrapper>
+      <Header>나 JOB알아봐라</Header>
+      <Container visible={isVisible}>
         <BackButton />
         <Title>관심 직무</Title>
         <JobSelectionContainer>
-            <Column>
+          <Column>
             {jobsLeft.map((job, index) => (
-                <JobCheckbox key={index}>
-                <input type="checkbox" id={`job-${index}`} />
+              <JobCheckbox key={index}>
+                <ItemInput type="checkbox" id={`job-${index}`} />
                 <label htmlFor={`job-${index}`}>{job}</label>
-                </JobCheckbox>
+              </JobCheckbox>
             ))}
-            </Column>
-            <Column>
+          </Column>
+          <Column>
             {jobsRight.map((job, index) => (
-                <JobCheckbox key={index}>
-                <input type="checkbox" id={`job-${index + jobsLeft.length}`} />
+              <JobCheckbox key={index}>
+                <ItemInput
+                  type="checkbox"
+                  id={`job-${index + jobsLeft.length}`}
+                />
                 <label htmlFor={`job-${index + jobsLeft.length}`}>{job}</label>
-                </JobCheckbox>
+              </JobCheckbox>
             ))}
-            </Column>
+          </Column>
         </JobSelectionContainer>
-        <SaveButtonComponent />
-        </Container>
-    </div>
+      </Container>
+      <SaveButtonComponent />
+    </Wrapper>
   );
 };
 

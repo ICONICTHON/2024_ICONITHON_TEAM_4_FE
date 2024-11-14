@@ -1,17 +1,22 @@
-import React from "react";
-import styled from 'styled-components';
-import Header from '../../component/header/header';
-import BackButton from '../../component/mypage/backbutton';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import Header from "../../component/header/header";
+import BackButton from "../../component/mypage/backbutton";
+import { useLocation } from "react-router-dom";
 
 const Container = styled.div`
-  width: 100vw;
+  width: 88vw;
   margin: 0 auto;
-  padding: 10px;
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
   background-color: #ffffff;
   font-family: "SCDream4", sans-serif;
+
+  opacity: ${(props) => (props.visible ? 1 : 0)};
+  transform: ${(props) =>
+    props.visible ? "translateY(0)" : "translateY(20px)"};
+  transition: opacity 0.5s ease, transform 0.5s ease;
 `;
 
 const Title = styled.h2`
@@ -46,17 +51,26 @@ function MyInfoPage() {
   // 예시 데이터 객체
   const userInfo = {
     "아이디(이메일)": "example@example.com",
-    "비밀번호": "********",
-    "이름": "홍길동",
-    "전화번호": "010-1234-5678",
+    비밀번호: "********",
+    이름: "홍길동",
+    전화번호: "010-1234-5678",
     "생년월일(6자리)": "950101",
   };
+
+  const [isVisible, setIsVisible] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    setIsVisible(false);
+    const timeout = setTimeout(() => setIsVisible(true), 50);
+    return () => clearTimeout(timeout);
+  }, [location]);
 
   return (
     <div>
       <Header />
-      <Container>
-      <BackButton />
+      <Container visible={isVisible}>
+        <BackButton />
         <Title>MY 정보</Title>
         {Object.entries(userInfo).map(([label, value]) => (
           <InfoGroup key={label}>
