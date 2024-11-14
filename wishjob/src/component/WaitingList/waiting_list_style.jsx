@@ -6,7 +6,8 @@ export const TeamListContainer = styled.div`
   flex-direction: column;
   background-color: #ffffff;
   border-radius: 10px;
-  padding: 16px;
+  padding: 15px;
+  padding-top:20px;
   width: 100%;
   margin: 10px;
   max-width: 600px; /* 너비 확대 */
@@ -96,4 +97,9 @@ export const Icon = styled.span`
   margin-left: 4px;
   display: inline-flex;
   vertical-align: middle;
+  &:active,&:hover {
+    opacity: 0.8; /* 마우스 올렸을 때 흐려짐 */
+    transform: scale(0.98); /* 클릭 시 크기를 줄여 눌러진 느낌을 줌 */
+    transition: transform 0.1s ease;
+  }
 `;

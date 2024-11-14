@@ -14,7 +14,7 @@ const ForCompany_reservation = () => {
         <S.Container>
           <S.TitleContainer>
             <S.BackIcon>
-              <IoChevronBack onClick={() => nav("/ForCompany")} size={24} style={{ marginRight: "8px" }} />
+              <IoChevronBack onClick={() => nav("/main")} size={24} style={{ marginRight: "8px" }} />
             </S.BackIcon>
             <S.Title>상담완료 내역</S.Title>
           </S.TitleContainer>
