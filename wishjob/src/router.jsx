@@ -8,7 +8,6 @@ import MyResume from "./pages/mypage/myresumePage";
 import MyDuty from "./pages/mypage/mydutyPage";
 import MyReservation from "./pages/mypage/myreservationPage";
 import Login from "./pages/login/login";
-import ForCompanyReservation from "./pages/For_Company/ForCompanyReservation";
 
 const router = createBrowserRouter([
   {
@@ -46,10 +45,6 @@ const router = createBrowserRouter([
   {
     path: "/myreservation",
     element: <MyReservation />,
-  },
-  {
-    path: "/ComReservation",
-    element: <ForCompanyReservation />,
   },
 ]);
 
