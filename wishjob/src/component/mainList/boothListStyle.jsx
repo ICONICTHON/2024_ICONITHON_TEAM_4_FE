@@ -23,7 +23,7 @@ export const Item = styled.div`
   border: solid 2px #306ed4;
   color: black;
   border-radius: 4px;
-  font-family: SCDream5;
+  font-family: SCDream4;
   display: flex;
   justify-content: space-between;
   cursor: pointer;
@@ -31,7 +31,7 @@ export const Item = styled.div`
 
   &:hover,
   &:active {
-    transform: translateY(-4px);
+    transform: scale(0.98);
     transition: transform 0.1s ease;
   }
 `;
@@ -41,5 +41,9 @@ export const BoothNum = styled.div`
 `;
 export const BoothCate = styled.div``;
 export const BoothName = styled.div`
+  width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   margin-right: 8px;
 `;

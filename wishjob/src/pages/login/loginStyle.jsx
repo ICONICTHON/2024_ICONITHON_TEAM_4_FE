@@ -10,3 +10,10 @@ export const Wrapper = styled.div`
   justify-content: center;
   gap: 6vh;
 `;
+
+export const Container = styled.div`
+  opacity: ${(props) => (props.visible ? 1 : 0)};
+  transform: ${(props) =>
+    props.visible ? "translateY(0)" : "translateY(20px)"};
+  transition: opacity 0.5s ease, transform 0.5s ease;
+`;

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { IoCheckmarkCircleOutline } from "react-icons/io5"; // 아이콘 변경
 import { AiOutlineDelete } from "react-icons/ai"; // 아이콘 변경
 import { FiFileText } from "react-icons/fi";
-import Header from "../../component/header/header";
+import HeaderCompany from "../../component/header/headerCompany";
 import * as S from "./ForCompany_style";
 import { useLocation } from "react-router-dom";
 import TeamItemList from "../../component/WaitingList/waiting_list";
@@ -14,7 +14,7 @@ const ForCompany = () => {
 
   return (
     <>
-      <Header />
+      <HeaderCompany />
       <S.Container>
         <S.CompanyNameButton>기업 이름</S.CompanyNameButton>
         <S.SubHeader>담당자: 000</S.SubHeader>
@@ -23,7 +23,8 @@ const ForCompany = () => {
           <S.QueueCount>{teamCount}</S.QueueCount> {/* teamCount로 표시 */}
           <S.QueueLabel>팀</S.QueueLabel>
         </S.QueueInfoBox>
-        <TeamItemList setTeamCount={setTeamCount} /> {/* setTeamCount를 TeamItemList에 전달 */}
+        <TeamItemList setTeamCount={setTeamCount} />{" "}
+        {/* setTeamCount를 TeamItemList에 전달 */}
       </S.Container>
     </>
   );

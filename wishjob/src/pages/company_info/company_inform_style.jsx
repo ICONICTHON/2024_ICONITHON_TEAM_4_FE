@@ -2,53 +2,44 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  padding: 20px;
+  opacity: ${(props) => (props.visible ? 1 : 0)};
+  transform: ${(props) =>
+    props.visible ? "translateY(0)" : "translateY(20px)"};
+  transition: opacity 0.5s ease, transform 0.5s ease;
+
   font-family: "SCDream4";
-  max-width: 600px;
-  margin: 0 auto;
-`;
-
-export const CompanyImageSection = styled.div`
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 10px;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  margin-top: 60px;
-`;
-
-export const CompanyImage = styled.div`
-  background-color: #ccc;
-`;
-
-export const LargeCompanyImage = styled(CompanyImage)`
-  grid-row: span 2;
-  width: 100%;
-  height: 100%;
-`;
-
-export const SmallCompanyImage = styled(CompanyImage)`
-  height: 100px;
+  gap: 4vh;
 `;
 
 export const CompanyInfo = styled.div`
-  margin-top: 20px;
-  font-size: 16px;
+  font-family: SCDream4;
+  padding-top: 60px;
+  font-size: 14px;
   text-align: center;
+  width: 80vw;
 
   h2 {
+    font-family: SCDream5;
+
     font-size: 20px;
-    margin-bottom: 10px;
   }
 `;
 
 export const QueueInfoContainer = styled.div`
+  font-family: SCDream3;
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
-  gap: 10px;
+  gap: 12px;
+  width: 80vw;
 `;
 
 export const QueueInfoBox = styled.div`
+  font-family: SCDream3;
   flex: 1;
   border: 1px solid #f2a900;
   padding: 10px;
@@ -58,57 +49,60 @@ export const QueueInfoBox = styled.div`
 `;
 
 export const JobDescription = styled.div`
-  margin-top: 15px;
+  width: 80vw;
   background-color: #e0e0e0;
-  padding: 10px;
   border-radius: 8px;
-  font-size: 14px;
   text-align: center;
-  height:100px;
+  font-size: 14px;
+`;
+
+export const Text = styled.div`
+  margin: 12px;
 `;
 
 export const AvailableCompaniesSection = styled.div`
-  margin-top: 20px;
   text-align: center;
 `;
 
-export const AvailableCompaniesTitle = styled.h3`
+export const AvailableCompaniesTitle = styled.div`
   font-size: 16px;
-  margin-bottom: 10px;
+  font-family: SCDream4;
 `;
 
 export const AvailableCompanies = styled.div`
+  margin-top: 2vh;
   display: flex;
-  justify-content: space-around;
-  margin-top: 10px;
+  justify-content: space-between;
+  width: 60vw;
 `;
 
 export const AvailableCompany = styled.div`
   width: 60px;
   height: 60px;
   background-color: #ccc;
-  margin: 5px;
 `;
 
 export const WaitButtonContainer = styled.div`
-  margin-top: 20px;
   display: flex;
   justify-content: center;
 `;
 
 export const WaitButton = styled.button`
-  width: 90%;
-  max-width: 400px;
+  width: 80vw;
+  height: 32px;
+  font-family: SCDream3;
   background-color: #f2a900;
   color: white;
-  font-size: 16px;
-  padding: 12px;
+  font-size: 14px;
   border: none;
-  border-radius: 8px;
+  border-radius: 16px;
   cursor: pointer;
   font-weight: bold;
-  &:active,&:hover {
-    transform: scale(0.98); /* 클릭 시 크기를 줄여 눌러진 느낌을 줌 */
-    transition: transform 0.1s ease;
+  box-shadow: 2px 2px 2px #00000040;
+  &:hover,
+  &:active {
+    opacity: 0.8;
+    transform: scale(0.98);
+    transition: transform 0.2s ease;
   }
 `;

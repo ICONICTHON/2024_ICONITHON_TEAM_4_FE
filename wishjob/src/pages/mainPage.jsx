@@ -6,6 +6,7 @@ import Map from "../component/map/map";
 import DaySelection from "../component/map/daySelction";
 import FloorSelection from "../component/map/floorSelection";
 import BoothList from "../component/mainList/boothList";
+import ForCompany from "./For_Company/ForCompany";
 
 const dayList = [{ name: "1일차" }, { name: "2일차" }, { name: "3일차" }];
 const floorList = [{ name: "2층" }, { name: "3층" }];
@@ -43,21 +44,29 @@ export default function Main() {
     return () => clearTimeout(timeout);
   }, [location]);
 
+  const isCompany = 1;
+
   return (
     <div>
-      <Header />
-      <Content visible={isVisible}>
-        <Map floorOption={floorOption} />
-        <Select>
-          <DaySelection list={dayList} />
-          <FloorSelection
-            list={floorList}
-            floorOption={floorOption}
-            setFloorOption={setFloorOption}
-          />
-        </Select>
-        <BoothList floorOption={floorOption} />
-      </Content>
+      {isCompany === 0 ? (
+        <>
+          <Header />
+          <Content visible={isVisible}>
+            <Map floorOption={floorOption} />
+            <Select>
+              <DaySelection list={dayList} />
+              <FloorSelection
+                list={floorList}
+                floorOption={floorOption}
+                setFloorOption={setFloorOption}
+              />
+            </Select>
+            <BoothList floorOption={floorOption} />
+          </Content>
+        </>
+      ) : (
+        <ForCompany />
+      )}
     </div>
   );
 }

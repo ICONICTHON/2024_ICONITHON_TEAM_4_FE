@@ -8,9 +8,9 @@ export default function HeaderCompany() {
   return (
     <S.Wrapper>
       <S.SetSpace></S.SetSpace>
-      <S.Text onClick={() => nav("/ForCompany")}>나 JOB알아봐라</S.Text>
+      <S.Text onClick={() => nav("/main")}>나 JOB알아봐라</S.Text>
       <S.UserIcon>
-        <FaRegCheckSquare size={28} onClick={() => nav("/mypage")} />
+        <FaRegCheckSquare size={28} onClick={() => nav("/ComReservation")} />
       </S.UserIcon>
     </S.Wrapper>
   );
