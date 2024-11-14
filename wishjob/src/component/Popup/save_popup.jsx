@@ -1,14 +1,13 @@
 import React from "react";
 
-const WaitingCancelPopup = ({ onClose }) => {
+const SavePopup = ({ onClose }) => {
     return (
         <div style={styles.modalOverlay}>
         <div style={styles.modalContent}>
           <div style={styles.modalBody}>
-            <h3>취소하시겠습니까?</h3>
+            <h3>저장되었습니다.</h3>
             <div style={styles.buttonContainer}>
               <button style={styles.confirmButton} onClick={onClose}>확인</button>
-              <button style={styles.confirmButton} onClick={onClose}>취소</button>
             </div>
           </div>
         </div>
@@ -55,4 +54,4 @@ const styles = {
   },
 };
 
-export default WaitingCancelPopup;
+export default SavePopup;

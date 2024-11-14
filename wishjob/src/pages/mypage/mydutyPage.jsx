@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Header from '../../component/header/header';
 import BackButton from '../../component/mypage/backbutton';
+import SaveButtonComponent from '../../component/mypage/savebutton';
 
 // Styled components
 const Container = styled.div`
@@ -52,25 +53,6 @@ const JobCheckbox = styled.label`
   }
 `;
 
-const SaveButtonContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  margin: 20px 20px 0 0;
-`;
-
-const SaveButton = styled.button`
-  width: 130px;
-  height: 35px;
-  margin-right: 15px;
-  background-color: #f49c00;
-  color: #000;
-  font-weight: bold;
-  font-size: 15px;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-`;
-
 const jobsLeft = ["기획·전략", "인사·HR", "마케팅·광고·MD", "디자인", "운전·운송·배송", "고객상담·TM", "식·음료", "엔지니어링·설계", "교육", "의료·바이오", "공공·복지"];
 const jobsRight = ["고객상담·TM", "법무·사무·총무", "회계·세무", "개발·데이터", "물류·무역", "영업", "금융·보험", "고객서비스·리테일", "제조·생산", "건축·시설", "미디어·문화·스포츠"];
 
@@ -99,9 +81,7 @@ const JobSelectionPage = () => {
             ))}
             </Column>
         </JobSelectionContainer>
-        <SaveButtonContainer>
-          <SaveButton>저장</SaveButton>
-        </SaveButtonContainer>
+        <SaveButtonComponent />
         </Container>
     </div>
   );

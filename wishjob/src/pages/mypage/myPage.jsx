@@ -60,7 +60,7 @@ const MyPage = () => {
             {item.text} {item.icon}
           </ListItem>
         ))}
-        <ListItem logout onClick={() => handleNavigation("/main")}>
+        <ListItem logout onClick={() => handleNavigation("/")}>
           로그 아웃 <FiLogOut />
         </ListItem>
       </Container>
