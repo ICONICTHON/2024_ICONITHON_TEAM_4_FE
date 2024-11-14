@@ -44,7 +44,7 @@ export default function Main() {
     return () => clearTimeout(timeout);
   }, [location]);
 
-  const isCompany = 1;
+  const isCompany = 0;
 
   return (
     <div>
