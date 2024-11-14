@@ -1,13 +1,10 @@
 // company_inform.jsx
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { IoMenu } from "react-icons/io5";
-import { TbUserSquareRounded } from "react-icons/tb";
 import Header from "../../component/header/header";
 import * as S from "./company_inform_style";
 import WaitingPopup from "../../component/Popup/waiting_popup";
 import ReservationFinish from "../../component/Popup/reservation_finish";
-import styled from "styled-components";
 
 const CompanyInfo = () => {
   const location = useLocation();

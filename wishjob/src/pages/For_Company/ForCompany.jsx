@@ -1,11 +1,7 @@
 // ForCompany.jsx
 import React, { useState } from "react";
-import { IoCheckmarkCircleOutline } from "react-icons/io5"; // 아이콘 변경
-import { AiOutlineDelete } from "react-icons/ai"; // 아이콘 변경
-import { FiFileText } from "react-icons/fi";
 import HeaderCompany from "../../component/header/headerCompany";
 import * as S from "./ForCompany_style";
-import { useLocation } from "react-router-dom";
 import TeamItemList from "../../component/WaitingList/waiting_list";
 
 const ForCompany = () => {

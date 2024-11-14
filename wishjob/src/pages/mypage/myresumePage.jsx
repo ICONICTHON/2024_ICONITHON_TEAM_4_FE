@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import Header from '../../component/header/header';
-import BackButton from '../../component/mypage/backbutton';
-import SaveButtonComponent from '../../component/mypage/savebutton';
-import { FaPlus, FaTrash } from 'react-icons/fa';
+import React, { useState } from "react";
+import styled from "styled-components";
+import Header from "../../component/header/header";
+import BackButton from "../../component/mypage/backbutton";
+import SaveButtonComponent from "../../component/mypage/savebutton";
+import { FaPlus, FaTrash } from "react-icons/fa";
 
 // Styled components
 const Container = styled.div`
-  width: 100vw;
+  width: 88vw;
   margin: 0 auto;
-  padding: 10px;
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
   background-color: #ffffff;
   font-family: "SCDream4", sans-serif;
+  gap: 12px;
 `;
 
 const HeadTitle = styled.h2`
@@ -28,8 +28,10 @@ const HeadTitle = styled.h2`
 const SectionContainer = styled.div`
   background: #fbc400;
   border-radius: 10px;
-  margin: 10px 20px;
   padding: 15px 20px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 12px;
 `;
 
 const InputField = styled.input`
@@ -109,7 +111,7 @@ const PlusButton = styled.div`
   margin-bottom: 5px;
   gap: 5px;
   opacity: ${(props) => (props.disabled ? 0.5 : 1)};
-  pointer-events: ${(props) => (props.disabled ? 'none' : 'auto')};
+  pointer-events: ${(props) => (props.disabled ? "none" : "auto")};
 `;
 
 const CareerItem = styled.div`
@@ -145,13 +147,17 @@ const DeleteButton = styled.button`
   padding: 5px;
 `;
 
+const Wrapper = styled.div`
+  width: 100vw;
+  height: 100vh;
+`;
 const ResumePage = () => {
   const [careers, setCareers] = useState([]);
-  const [jobType, setJobType] = useState('');
-  const [company, setCompany] = useState('');
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [responsibilities, setResponsibilities] = useState('');
+  const [jobType, setJobType] = useState("");
+  const [company, setCompany] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [responsibilities, setResponsibilities] = useState("");
 
   const addCareer = () => {
     // Check if all fields are filled
@@ -167,22 +173,23 @@ const ResumePage = () => {
       responsibilities,
     };
     setCareers([...careers, newCareer]);
-    setJobType('');
-    setCompany('');
-    setStartDate('');
-    setEndDate('');
-    setResponsibilities('');
+    setJobType("");
+    setCompany("");
+    setStartDate("");
+    setEndDate("");
+    setResponsibilities("");
   };
 
   // Check if the add button should be enabled
-  const isAddDisabled = !jobType || !company || !startDate || !endDate || !responsibilities;
+  const isAddDisabled =
+    !jobType || !company || !startDate || !endDate || !responsibilities;
 
   const deleteCareer = (id) => {
     setCareers(careers.filter((career) => career.id !== id));
   };
 
   return (
-    <div>
+    <Wrapper>
       <Header />
       <Container>
         <BackButton />
@@ -213,15 +220,18 @@ const ResumePage = () => {
           <InputField placeholder="학교를 입력해 주세요." />
           <InputField placeholder="학과를 입력해 주세요." />
           <InfoGroup>
-              <Label>졸업예정일</Label>
-              <InputField type="date" />
+            <Label>졸업예정일</Label>
+            <InputField type="date" />
           </InfoGroup>
         </SectionContainer>
 
         {/* Section: Career Details */}
         <SectionContainer>
           <Title>경력 사항</Title>
-          <SelectField value={jobType} onChange={(e) => setJobType(e.target.value)}>
+          <SelectField
+            value={jobType}
+            onChange={(e) => setJobType(e.target.value)}
+          >
             <option value="">근무 형태를 선택해주세요.</option>
             <option value="풀타임">풀타임</option>
             <option value="파트타임">파트타임</option>
@@ -242,43 +252,54 @@ const ResumePage = () => {
           <Row>
             <InfoGroup>
               <Label>시작일</Label>
-              <InputField type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+              <InputField
+                type="date"
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+              />
             </InfoGroup>
             <InfoGroup>
               <Label>종료일</Label>
-              <InputField type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+              <InputField
+                type="date"
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+              />
             </InfoGroup>
           </Row>
           <PlusButton onClick={addCareer} disabled={isAddDisabled}>
-            <FaPlus /> 
+            <FaPlus />
           </PlusButton>
 
           {/* Career List */}
-          {careers.length > 0 && careers.map((career) => (
-            <CareerItem key={career.id}>
-              <CareerField>
-                <Label>근무 형태:</Label>
-                <span>{career.jobType}</span>
-              </CareerField>
-              <CareerField>
-                <Label>회사명:</Label>
-                <span>{career.company}</span>
-              </CareerField>
-              <CareerField>
-                <Label>근무 기간:</Label>
-                <span>{career.startDate} ~ {career.endDate}</span>
-              </CareerField>
-              <CareerField>
-                <Label>담당 업무:</Label>
-                <span>{career.responsibilities}</span>
-              </CareerField>
-              <DeleteButtonContainer>
-                <DeleteButton onClick={() => deleteCareer(career.id)}>
-                  <FaTrash /> 삭제
-                </DeleteButton>
-              </DeleteButtonContainer>
-            </CareerItem>
-          ))}
+          {careers.length > 0 &&
+            careers.map((career) => (
+              <CareerItem key={career.id}>
+                <CareerField>
+                  <Label>근무 형태:</Label>
+                  <span>{career.jobType}</span>
+                </CareerField>
+                <CareerField>
+                  <Label>회사명:</Label>
+                  <span>{career.company}</span>
+                </CareerField>
+                <CareerField>
+                  <Label>근무 기간:</Label>
+                  <span>
+                    {career.startDate} ~ {career.endDate}
+                  </span>
+                </CareerField>
+                <CareerField>
+                  <Label>담당 업무:</Label>
+                  <span>{career.responsibilities}</span>
+                </CareerField>
+                <DeleteButtonContainer>
+                  <DeleteButton onClick={() => deleteCareer(career.id)}>
+                    <FaTrash /> 삭제
+                  </DeleteButton>
+                </DeleteButtonContainer>
+              </CareerItem>
+            ))}
         </SectionContainer>
 
         {/* Section: Self Introduction */}
@@ -286,11 +307,9 @@ const ResumePage = () => {
           <Title>자기 소개 (500자)</Title>
           <Textarea placeholder="자기 소개를 입력해 주세요." />
         </SectionContainer>
-
-        {/* Section: Save Button */}
-        <SaveButtonComponent />
       </Container>
-    </div>
+      <SaveButtonComponent />
+    </Wrapper>
   );
 };
 
