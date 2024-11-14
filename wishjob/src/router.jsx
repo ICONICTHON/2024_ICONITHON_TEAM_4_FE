@@ -2,10 +2,12 @@ import App from "./App";
 import { createBrowserRouter } from "react-router-dom";
 import Main from "./pages/mainPage";
 import Signup from "./pages/signup"; 
-import Mypage from "./pages/myPage";
+import Mypage from "./pages/mypage/myPage";
 import CompanyInfo from "./pages/company_inform";
-import MyInfo from "./pages/myinfoPage";
-import MyResume from "./pages/myresumePage";
+import MyInfo from "./pages/mypage/myinfoPage";
+import MyResume from "./pages/mypage/myresumePage";
+import MyDuty from "./pages/mypage/mydutyPage";
+import MyReservation from "./pages/mypage/myreservationPage";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +37,14 @@ const router = createBrowserRouter([
   {
     path: "/myresume",
     element:<MyResume />,
+  },
+  {
+    path: "/myduty",
+    element:<MyDuty />,
+  },
+  {
+    path: "/myreservation",
+    element:<MyReservation />,
   },
 ]);
 

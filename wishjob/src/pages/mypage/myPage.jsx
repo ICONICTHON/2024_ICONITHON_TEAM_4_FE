@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Header from "../component/header/header";
+import Header from "../../component/header/header";
 import { FiLogOut } from "react-icons/fi";
 import { FaChevronRight } from "react-icons/fa";
 
