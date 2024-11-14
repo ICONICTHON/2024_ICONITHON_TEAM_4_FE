@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Header from '../../component/header/header';
 import BackButton from '../../component/mypage/backbutton';
+import SaveButtonComponent from '../../component/mypage/savebutton';
 import { FaPlus, FaTrash } from 'react-icons/fa';
 
 // Styled components
@@ -41,6 +42,20 @@ const InputField = styled.input`
   box-sizing: border-box;
 `;
 
+const InfoText = styled.span`
+  display: block;
+  background: #e8e8e8;
+  width: 100%;
+  height: 30px;
+  line-height: 30px; /* 세로 가운데 정렬을 위한 속성 */
+  margin-bottom: 10px;
+  border: 1px solid #a39890;
+  border-radius: 8px;
+  padding: 0 10px;
+  box-sizing: border-box;
+  color: #555; /* 텍스트 색상 */
+`;
+
 const SelectField = styled.select`
   width: 100%;
   height: 30px;
@@ -78,25 +93,6 @@ const Textarea = styled.textarea`
   padding: 5px;
 `;
 
-const SaveButtonContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  margin: 20px 20px 0 0;
-`;
-
-const SaveButton = styled.button`
-  width: 130px;
-  height: 35px;
-  margin-right: 15px;
-  background-color: #f49c00;
-  color: #000;
-  font-weight: bold;
-  font-size: 15px;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-`;
-
 const InfoGroup = styled.div`
   flex: 1;
 `;
@@ -106,9 +102,10 @@ const PlusButton = styled.div`
   align-items: center;
   justify-content: flex-end;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 15px;
   color: #f49c00;
-  margin-top: -10px;
+  margin-top: 0px;
+  margin-right: 10px;
   gap: 5px;
 `;
 
@@ -174,16 +171,16 @@ const ResumePage = () => {
           <Row>
             <InfoGroup>
               <Label>이름</Label>
-              <InputField value="김도현" disabled />
+              <InfoText>김도현</InfoText>
             </InfoGroup>
             <InfoGroup>
               <Label>생년월일(6자리)</Label>
-              <InputField value="021213" disabled />
+              <InfoText>021213</InfoText>
             </InfoGroup>
           </Row>
           <InfoGroup>
             <Label>전화번호</Label>
-            <InputField value="010-1234-5678" disabled />
+            <InfoText>010-1234-5678</InfoText>
           </InfoGroup>
         </SectionContainer>
 
@@ -224,7 +221,7 @@ const ResumePage = () => {
             </InfoGroup>
           </Row>
           <PlusButton onClick={addCareer}>
-            <FaPlus /> 추가
+            <FaPlus /> 
           </PlusButton>
 
           {/* Career Table */}
@@ -265,9 +262,7 @@ const ResumePage = () => {
         </SectionContainer>
 
         {/* Section: Save Button */}
-        <SaveButtonContainer>
-          <SaveButton>저장</SaveButton>
-        </SaveButtonContainer>
+        <SaveButtonComponent />
       </Container>
     </div>
   );
