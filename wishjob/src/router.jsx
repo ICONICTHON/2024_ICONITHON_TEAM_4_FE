@@ -7,6 +7,7 @@ import CompanyInfo from "./pages/company_info/company_inform";
 import MyInfo from "./pages/myinfoPage";
 import MyResume from "./pages/myresumePage";
 import Login from "./pages/login/login";
+import ForCompany from "./pages/For_Company/ForCompany";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
     path: "/myresume",
     element: <MyResume />,
   },
+  {
+    path:"/ForCompany",
+    element:<ForCompany />
+  }
 ]);
 
 export default router;
