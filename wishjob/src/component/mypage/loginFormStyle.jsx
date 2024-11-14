@@ -26,21 +26,30 @@ export const PasswordContainer = styled.div`
   position: relative;
 `;
 
-export const TogglePasswordButton = styled.span`
+export const TogglePasswordButton = styled.button`
   position: absolute;
   right: 2vw;
-  top: 32%;
-  transform: scale(0.96);
-  transition: transform 0.2s ease;
+  top: 25%;
   cursor: pointer;
   font-size: 10px;
+  background-color: #fbc400;
+  border: none;
+  border-radius: 12px;
+  font-family: SCDream3;
+  box-shadow: 1px 1px 1px #00000040;
+  &:hover,
+  &:active {
+    background-color: #f49c00;
+    transform: scale(0.96);
+    transition: transform 0.2s ease;
+  }
 `;
 
-export const LoginButton = styled.div`
-  width: 64vw;
+export const LoginButton = styled.input`
+  width: 70vw;
   height: 32px;
   border-radius: 16px;
-  background-color: #f49c00;
+  background-color: #fbc400;
   text-align: center;
   line-height: 32px;
   box-shadow: 2px 2px 2px #00000040;
@@ -48,9 +57,11 @@ export const LoginButton = styled.div`
   &:hover,
   &:active {
     transform: scale(0.96);
-    opacity: 0.8;
+    background-color: #f49c00;
     transition: transform 0.2s ease;
   }
+  border: none;
+  font-family: SCDream4;
 `;
 
 export const NavSignUp = styled.div`
