@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "../component/header/header";
-import styled from "styled-components";
-import BackButton from "../component/mypage/backbutton"; 
+import styled from 'styled-components';
+import Header from '../../component/header/header';
+import BackButton from '../../component/mypage/backbutton';
 
 const Container = styled.div`
   width: 100vw;
