@@ -107,4 +107,8 @@ export const WaitButton = styled.button`
   border-radius: 8px;
   cursor: pointer;
   font-weight: bold;
+  &:active,&:hover {
+    transform: scale(0.98); /* 클릭 시 크기를 줄여 눌러진 느낌을 줌 */
+    transition: transform 0.1s ease;
+  }
 `;
