@@ -47,13 +47,13 @@ const InfoText = styled.span`
   background: #e8e8e8;
   width: 100%;
   height: 30px;
-  line-height: 30px; /* 세로 가운데 정렬을 위한 속성 */
+  line-height: 30px;
   margin-bottom: 10px;
   border: 1px solid #a39890;
   border-radius: 8px;
   padding: 0 10px;
   box-sizing: border-box;
-  color: #555; /* 텍스트 색상 */
+  color: #555;
 `;
 
 const SelectField = styled.select`
@@ -91,6 +91,7 @@ const Textarea = styled.textarea`
   border: 1px solid #a39890;
   border-radius: 8px;
   padding: 5px;
+  box-sizing: border-box;
 `;
 
 const InfoGroup = styled.div`
@@ -104,24 +105,33 @@ const PlusButton = styled.div`
   cursor: pointer;
   font-size: 15px;
   color: #f49c00;
-  margin-top: 0px;
   margin-right: 10px;
+  margin-bottom: 5px;
   gap: 5px;
+  opacity: ${(props) => (props.disabled ? 0.5 : 1)};
+  pointer-events: ${(props) => (props.disabled ? 'none' : 'auto')};
 `;
 
-const CareerTable = styled.table`
-  width: 100%;
-  margin-top: 20px;
-  border-collapse: collapse;
-`;
-
-const TableRow = styled.tr`
-  border-bottom: 1px solid #ddd;
-`;
-
-const TableCell = styled.td`
+const CareerItem = styled.div`
+  background: #fff7cc;
+  border-radius: 8px;
   padding: 10px;
-  text-align: center;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+`;
+
+const CareerField = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  font-size: 12px;
+`;
+
+const DeleteButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -5px;
 `;
 
 const DeleteButton = styled.button`
@@ -129,7 +139,10 @@ const DeleteButton = styled.button`
   border: none;
   color: #f41000;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  padding: 5px;
 `;
 
 const ResumePage = () => {
@@ -138,21 +151,31 @@ const ResumePage = () => {
   const [company, setCompany] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
+  const [responsibilities, setResponsibilities] = useState('');
 
   const addCareer = () => {
+    // Check if all fields are filled
+    if (!jobType || !company || !startDate || !endDate || !responsibilities) {
+      return;
+    }
     const newCareer = {
       id: Date.now(),
       jobType,
       company,
       startDate,
       endDate,
+      responsibilities,
     };
     setCareers([...careers, newCareer]);
     setJobType('');
     setCompany('');
     setStartDate('');
     setEndDate('');
+    setResponsibilities('');
   };
+
+  // Check if the add button should be enabled
+  const isAddDisabled = !jobType || !company || !startDate || !endDate || !responsibilities;
 
   const deleteCareer = (id) => {
     setCareers(careers.filter((career) => career.id !== id));
@@ -210,6 +233,12 @@ const ResumePage = () => {
             value={company}
             onChange={(e) => setCompany(e.target.value)}
           />
+          <InputField
+            placeholder="담당업무와 내용을 입력하세요. (50자 이내)"
+            value={responsibilities}
+            onChange={(e) => setResponsibilities(e.target.value)}
+            maxLength="50"
+          />
           <Row>
             <InfoGroup>
               <Label>시작일</Label>
@@ -220,39 +249,36 @@ const ResumePage = () => {
               <InputField type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
             </InfoGroup>
           </Row>
-          <PlusButton onClick={addCareer}>
+          <PlusButton onClick={addCareer} disabled={isAddDisabled}>
             <FaPlus /> 
           </PlusButton>
 
-          {/* Career Table */}
-          {careers.length > 0 && (
-            <CareerTable>
-              <thead>
-                <tr>
-                  <th>근무 형태</th>
-                  <th>근무한 직장</th>
-                  <th>시작일</th>
-                  <th>종료일</th>
-                  <th>삭제</th>
-                </tr>
-              </thead>
-              <tbody>
-                {careers.map((career) => (
-                  <TableRow key={career.id}>
-                    <TableCell>{career.jobType}</TableCell>
-                    <TableCell>{career.company}</TableCell>
-                    <TableCell>{career.startDate}</TableCell>
-                    <TableCell>{career.endDate}</TableCell>
-                    <TableCell>
-                      <DeleteButton onClick={() => deleteCareer(career.id)}>
-                        <FaTrash /> 삭제
-                      </DeleteButton>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </tbody>
-            </CareerTable>
-          )}
+          {/* Career List */}
+          {careers.length > 0 && careers.map((career) => (
+            <CareerItem key={career.id}>
+              <CareerField>
+                <Label>근무 형태:</Label>
+                <span>{career.jobType}</span>
+              </CareerField>
+              <CareerField>
+                <Label>회사명:</Label>
+                <span>{career.company}</span>
+              </CareerField>
+              <CareerField>
+                <Label>근무 기간:</Label>
+                <span>{career.startDate} ~ {career.endDate}</span>
+              </CareerField>
+              <CareerField>
+                <Label>담당 업무:</Label>
+                <span>{career.responsibilities}</span>
+              </CareerField>
+              <DeleteButtonContainer>
+                <DeleteButton onClick={() => deleteCareer(career.id)}>
+                  <FaTrash /> 삭제
+                </DeleteButton>
+              </DeleteButtonContainer>
+            </CareerItem>
+          ))}
         </SectionContainer>
 
         {/* Section: Self Introduction */}
