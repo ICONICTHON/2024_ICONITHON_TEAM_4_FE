@@ -5,6 +5,7 @@ import BackButton from "../../component/mypage/backbutton";
 import { useNavigate } from "react-router-dom";
 import WaitingCancelPopup from "../../component/Popup/waitingcancel_popup";
 import { useLocation } from "react-router-dom";
+import axios from "../../axios";
 
 const Wrapper = styled.div`
   display: flex;
@@ -153,7 +154,7 @@ const CancelButton = styled.button`
 `;
 
 const BoothReservationPage = () => {
-  const [activeTab, setActiveTab] = useState("progress");
+  const [activeTab, setActiveTab] = useState(0);
 
   const [reservations, setReservations] = useState([]);
   const [isWaitingModalOpen, setIsWaitingModalOpen] = useState(false);
@@ -162,67 +163,28 @@ const BoothReservationPage = () => {
   const openWaitingModal = () => setIsWaitingModalOpen(true);
   const closeWaitingModal = () => setIsWaitingModalOpen(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = [
-        {
-          id: 1,
-          name: "기업이름기업이름기업이름1",
-          date: "9/17(월) 09:17",
-          status: "progress",
-          queue: 2,
-          waitTime: "30분",
-        },
-        {
-          id: 2,
-          name: "기업이름기업이름기업이름2",
-          date: "9/17(월) 09:17",
-          status: "progress",
-          queue: 2,
-          waitTime: "30분",
-        },
-        {
-          id: 3,
-          name: "기업이름기업이름기업이름3",
-          date: "9/17(월) 09:17",
-          status: "canceled",
-        },
-        {
-          id: 4,
-          name: "기업이름기업이름기업이름2",
-          date: "9/17(월) 09:17",
-          status: "progress",
-          queue: 2,
-          waitTime: "30분",
-        },
-        {
-          id: 5,
-          name: "기업이름기업이름기업이름2",
-          date: "9/17(월) 09:17",
-          status: "progress",
-          queue: 2,
-          waitTime: "30분",
-        },
-        {
-          id: 6,
-          name: "기업이름기업이름기업이름2",
-          date: "9/17(월) 09:17",
-          status: "completed",
-        },
-      ];
-      setReservations(data);
-    };
-
-    fetchData();
-  }, []);
-
-  const filteredReservations = reservations.filter(
-    (reservation) => reservation.status === activeTab
-  );
+  const userId = localStorage.getItem("userId");
+  const [userBoothList, setUBL] = useState([]);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`user/json/${userId}`);
+        setUBL(response.data.reservation_status);
+        console.log(response.data.reservation_status);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const filteredReservations = userBoothList.filter(
+    (reservation) => reservation.doneType === activeTab
+  );
 
   const navigate = useNavigate();
 
@@ -246,22 +208,13 @@ const BoothReservationPage = () => {
 
         {/* Tab Bar */}
         <TabBar>
-          <Tab
-            isActive={activeTab === "progress"}
-            onClick={() => handleTabClick("progress")}
-          >
+          <Tab isActive={activeTab === 0} onClick={() => handleTabClick(0)}>
             진행 전
           </Tab>
-          <Tab
-            isActive={activeTab === "completed"}
-            onClick={() => handleTabClick("completed")}
-          >
+          <Tab isActive={activeTab === 2} onClick={() => handleTabClick(2)}>
             완료
           </Tab>
-          <Tab
-            isActive={activeTab === "canceled"}
-            onClick={() => handleTabClick("canceled")}
-          >
+          <Tab isActive={activeTab === 1} onClick={() => handleTabClick(1)}>
             취소
           </Tab>
         </TabBar>
@@ -271,20 +224,21 @@ const BoothReservationPage = () => {
           {filteredReservations.map((reservation) => (
             <ReservationCard key={reservation.id}>
               <CardHeader>
-                <div>{reservation.name}</div>
+                <div>{reservation.boothName}</div>
                 <DetailButton onClick={() => navigate("/company_info")}>
                   상세보기
                 </DetailButton>
               </CardHeader>
               <Divider />
-              <CardDetails>이용 일시: {reservation.date}</CardDetails>
-              {reservation.status === "progress" && (
+              {reservation.doneType === 0 && (
                 <QueueInfo>
                   <QueueText>
-                    내 앞 대기: <RedText>{reservation.queue}팀</RedText>
+                    내 앞 대기:{" "}
+                    <RedText>{reservation.position_in_queue}팀</RedText>
                   </QueueText>
                   <QueueText>
-                    예상 대기 시간: <RedText>{reservation.waitTime}</RedText>
+                    예상 대기 시간:{" "}
+                    <RedText>{reservation.position_in_queue * 10}분</RedText>
                   </QueueText>
                   <CancelButton onClick={openWaitingModal}>
                     대기 취소
@@ -295,10 +249,10 @@ const BoothReservationPage = () => {
                   )}
                 </QueueInfo>
               )}
-              {reservation.status === "completed" && (
+              {reservation.doneType === 2 && (
                 <div style={{ color: "#306ED4", fontWeight: "bold" }}>완료</div>
               )}
-              {reservation.status === "canceled" && (
+              {reservation.doneType === 1 && (
                 <div style={{ color: "red", fontWeight: "bold" }}>
                   취소 완료
                 </div>

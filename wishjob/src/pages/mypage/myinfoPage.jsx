@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Header from "../../component/header/header";
 import BackButton from "../../component/mypage/backbutton";
 import { useLocation } from "react-router-dom";
+import axios from "../../axios";
 
 const Container = styled.div`
   width: 88vw;
@@ -49,13 +50,6 @@ const InfoText = styled.div`
 
 function MyInfoPage() {
   // 예시 데이터 객체
-  const userInfo = {
-    "아이디(이메일)": "example@example.com",
-    비밀번호: "********",
-    이름: "홍길동",
-    전화번호: "010-1234-5678",
-    "생년월일(6자리)": "950101",
-  };
 
   const [isVisible, setIsVisible] = useState(false);
   const location = useLocation();
@@ -65,6 +59,34 @@ function MyInfoPage() {
     const timeout = setTimeout(() => setIsVisible(true), 50);
     return () => clearTimeout(timeout);
   }, [location]);
+
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [birth, setBirth] = useState(new Date().toLocaleDateString());
+
+  const userId = localStorage.getItem("userId");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`user/json/${userId}`);
+        setName(response.data.username);
+        setPhone(response.data.phoneNum);
+        setBirth(response.data.birth);
+        console.log(response.data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const userInfo = {
+    "아이디(이메일)": userId,
+    이름: name,
+    전화번호: phone,
+    "생년월일(6자리)": birth,
+  };
 
   return (
     <div>

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Header from "../../component/header/header";
 import BackButton from "../../component/mypage/backbutton";
 import SaveButtonComponent from "../../component/mypage/savebutton";
 import { FaPlus, FaTrash } from "react-icons/fa";
+import axios from "../../axios";
 
 // Styled components
 const Container = styled.div`
@@ -188,6 +189,27 @@ const ResumePage = () => {
     setCareers(careers.filter((career) => career.id !== id));
   };
 
+  const [name, setName] = useState("");
+  const [birth, setBirth] = useState(new Date().toLocaleDateString());
+  const [phone, setPhone] = useState("");
+
+  const userId = localStorage.getItem("userId");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`user/json/${userId}`);
+        setName(response.data.username);
+        setBirth(response.data.birth);
+        setPhone(response.data.phoneNum);
+        console.log(response.data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <Wrapper>
       <Header />
@@ -201,16 +223,16 @@ const ResumePage = () => {
           <Row>
             <InfoGroup>
               <Label>이름</Label>
-              <InfoText>김도현</InfoText>
+              <InfoText>{name}</InfoText>
             </InfoGroup>
             <InfoGroup>
-              <Label>생년월일(6자리)</Label>
-              <InfoText>021213</InfoText>
+              <Label>생년월일</Label>
+              <InfoText>{birth}</InfoText>
             </InfoGroup>
           </Row>
           <InfoGroup>
             <Label>전화번호</Label>
-            <InfoText>010-1234-5678</InfoText>
+            <InfoText>{phone}</InfoText>
           </InfoGroup>
         </SectionContainer>
 

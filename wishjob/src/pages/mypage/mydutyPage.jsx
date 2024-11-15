@@ -4,6 +4,7 @@ import Header from "../../component/header/header";
 import BackButton from "../../component/mypage/backbutton";
 import SaveButtonComponent from "../../component/mypage/savebutton";
 import { useLocation } from "react-router-dom";
+import axios from "../../axios";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -106,6 +107,23 @@ const JobSelectionPage = () => {
     const timeout = setTimeout(() => setIsVisible(true), 50);
     return () => clearTimeout(timeout);
   }, [location]);
+
+  const [duties, setDuty] = useState([]);
+  const userId = localStorage.getItem("userId");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`user/json/${userId}`);
+        setDuty(response.data.companies_of_interest);
+        console.log(response.data.companies_of_interest);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <Wrapper>
       <Header>나 JOB알아봐라</Header>
