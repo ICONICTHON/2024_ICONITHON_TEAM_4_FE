@@ -25,10 +25,12 @@ export default function LoginForm() {
       });
 
       if (response.status === 200) {
+        localStorage.setItem("userType", response.data.user_type);
+        localStorage.setItem("userId", response.data.user_id);
         setUserType(response.data.user_type);
-        console.log("User Type:", response.data);
+        console.log("User Type:", response.data.user_type);
         alert("로그인이 성공적으로 완료되었습니다.");
-        nav("/main", { state: response.data.user_type });
+        nav("/main");
       }
     } catch (error) {
       console.error("로그인 오류:", error);

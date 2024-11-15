@@ -22,10 +22,8 @@ export const CompanyInfo = styled.div`
   font-size: 14px;
   text-align: center;
   width: 80vw;
-
   h2 {
     font-family: SCDream5;
-
     font-size: 20px;
   }
 `;

@@ -45,11 +45,11 @@ export default function Main() {
     return () => clearTimeout(timeout);
   }, [location]);
 
-  const userType = location.state;
+  const userType = localStorage.getItem("userType");
 
   return (
     <div>
-      {userType === 0 ? (
+      {userType === "0" ? (
         <>
           <Header />
           <Content visible={isVisible}>
