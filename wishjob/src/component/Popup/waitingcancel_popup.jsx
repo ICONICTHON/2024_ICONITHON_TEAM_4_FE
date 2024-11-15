@@ -28,7 +28,7 @@ const styles = {
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    backgroundColor: "rgba(0, 0, 0, 0.2)", // 배경 투명도를 낮춤
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -40,7 +40,7 @@ const styles = {
     width: "300px", // 팝업 너비를 늘림
     padding: "20px", // 전체 패딩을 늘려 내용이 넓어지도록 함
     textAlign: "center",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.8)",
     overflow: "hidden",
   },
   buttonContainer: {

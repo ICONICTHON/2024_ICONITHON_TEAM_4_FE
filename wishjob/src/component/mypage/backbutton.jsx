@@ -18,7 +18,7 @@ const Label = styled.span`
   color: #333;
 `;
 
-function BackButton({ label = "마이 페이지" }) {
+function BackButton({ label = "마이페이지" }) {
   const navigate = useNavigate();
 
   return (
