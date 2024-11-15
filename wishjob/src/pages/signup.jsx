@@ -111,7 +111,7 @@ function SignupPage() {
 
       if (response.status === 201) {
         alert("회원가입이 성공적으로 완료되었습니다.");
-        nav("/main"); // 회원가입 성공 시 메인 페이지로 이동
+        nav("/"); // 회원가입 성공 시 메인 페이지로 이동
       }
     } catch (error) {
       if (error.response) {

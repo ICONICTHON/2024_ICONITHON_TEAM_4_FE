@@ -1,10 +1,13 @@
 // company_inform.jsx
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import Header from "../../component/header/header";
 import * as S from "./company_inform_style";
 import WaitingPopup from "../../component/Popup/waiting_popup";
 import ReservationFinish from "../../component/Popup/reservation_finish";
+import axios from "axios";
+
+let data = "sample";
 
 const CompanyInfo = () => {
   const location = useLocation();
@@ -28,6 +31,21 @@ const CompanyInfo = () => {
     const timeout = setTimeout(() => setIsVisible(true), 50);
     return () => clearTimeout(timeout);
   }, [location]);
+
+  const boothId = useParams().booth_id;
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`jobfair/queue-position/${boothId}`);
+      console.log(response.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <>

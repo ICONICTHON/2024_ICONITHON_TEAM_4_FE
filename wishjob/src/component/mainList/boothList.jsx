@@ -37,7 +37,6 @@ export default function BoothList({ floorOption, dayOption }) {
       console.log(response.data.booths);
     } catch (e) {
       console.log(e);
-      setData([]); // 오류 발생 시 빈 배열로 설정
     }
   };
 
