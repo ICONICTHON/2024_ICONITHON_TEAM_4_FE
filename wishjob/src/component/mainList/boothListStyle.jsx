@@ -47,3 +47,26 @@ export const BoothName = styled.div`
   white-space: nowrap;
   margin-right: 8px;
 `;
+
+export const Container = styled.div``;
+
+export const PostBtn = styled.input`
+  height: 28px;
+  width: 120px;
+  background-color: #f49c00;
+  margin-bottom: 2vh;
+  border: none;
+  border-radius: 16px;
+  font-family: SCDream4;
+  font-size: 12px;
+  box-shadow: 2px 2px 2px #00000040;
+  &:active,
+  &:hover {
+    transform: scale(0.96);
+    translation: transform 0.2s ease;
+  }
+`;
+export const Star = styled.div`
+  color: #fbc400;
+  position: absolute;
+`;
